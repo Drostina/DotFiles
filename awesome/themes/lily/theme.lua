@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "Hack 8"
+theme.font          = "FiraCode Nerd Font 8"
 
 theme.bg_normal     = "#1a1b26"
 theme.bg_focus      = "#24283b"
@@ -57,9 +57,9 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 
 -- Variables set for theming notifications:
 theme.notification_bg = "#131519"
-theme.notification_width = 300
-theme.notification_height = 80
-theme.notification_icon_size = 50
+theme.notification_width = auto
+theme.notification_height = auto
+theme.notification_icon_size = 80
 theme.notification_border_width = 2
 theme.notification_border_color = "#7aa2f7"
 

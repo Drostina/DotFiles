@@ -48,7 +48,7 @@ end
 beautiful.init(".config/awesome/themes/lily/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -366,10 +366,8 @@ awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end
 {description = "open a terminal", group = "launcher"}),
 awful.key({ modkey,           }, "n", function () awful.spawn("thunar") end,
 {description = "open file manager", group = "launcher"}),
-awful.key({ modkey, "Control" }, "r", awesome.restart,
+awful.key({ modkey,           }, "r", awesome.restart,
 {description = "reload awesome", group = "awesome"}),
-awful.key({ modkey, "Shift"   }, "q", awesome.quit,
-{description = "quit awesome", group = "awesome"}),
 
 awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
 {description = "increase master width factor", group = "layout"}),
@@ -583,14 +581,13 @@ awful.rules.rules = {
     --}, properties = { titlebars_enabled = true }
     --},
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
     { rule = { class = "code", "Code"},
     properties = { tag = "Development" } },
 
-    { rule = { class = "Steam"},
+    { rule = { class = "steam", "Steam", "discord", "Discord"},
     properties = { tag = "Steam" } },
 
-    { rule = { class = "lutris", "Lutris", "Battle.Net" ,"battle.net.exe", "battle.net.exe" },
+    { rule = { class = "lutris", "Lutris", "Battle.Net" ,"battle.net.exe", "Battle.net.exe", "bottles", "Bottles" },
     properties = { tag = "Bottles" } },
 
     { rule = { class = "spotify", "Spotify" },
