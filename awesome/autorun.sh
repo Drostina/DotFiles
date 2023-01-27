@@ -1,5 +1,7 @@
 #!/bin/bash
 
 # Restore Wallpaper Set Via Nitrogen
-# nitrogen --restore
-
+nitrogen --restore &
+lxpolkit &
+discord &
+steam &

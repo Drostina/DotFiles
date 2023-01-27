@@ -165,23 +165,17 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    set_wallpaper(s)
+    -- Set Wallpaper
+    -- set_wallpaper(s)
     
     -- TAGS
     awful.tag.add("Home", {
-        icon               = ".config/awesome/icons/ICO_Coffee.png",
+        icon               = ".config/awesome/icons/ICO_Intellij.png",
         layout             = awful.layout.suit.tile,
         screen             = s,
         selected           = true,
     })
-    awful.tag.add("Development", {
-        icon               = ".config/awesome/icons/ICO_Intellij.png",
-        layout             = awful.layout.suit.tile,
-        screen             = s,
-        selected           = false,
-    })
-    awful.tag.add("Steam", {
+    awful.tag.add("Gaming", {
         icon               = ".config/awesome/icons/ICO_Steam.png",
         layout             = awful.layout.suit.tile,
         screen             = s,
@@ -195,12 +189,6 @@ awful.screen.connect_for_each_screen(function(s)
     })
     awful.tag.add("Bottles", {
         icon               = ".config/awesome/icons/ICO_Bottles.png",
-        layout             = awful.layout.suit.tile,
-        screen             = s,
-        selected           = false,
-    })
-    awful.tag.add("Files", {
-        icon               = ".config/awesome/icons/ICO_Folder.png",
         layout             = awful.layout.suit.tile,
         screen             = s,
         selected           = false,
@@ -313,8 +301,8 @@ awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
 {description = "view previous", group = "tag"}),
 awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
 {description = "view next", group = "tag"}),
-awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-{description = "go back", group = "tag"}),
+awful.key({ modkey,           }, "Escape", function () awful.spawn(".config/rofi/powermenu/type-5/powermenu.sh") end,
+{description = "run prompt", group = "launcher"}),
 
 awful.key({ modkey,           }, "j",
 function ()
@@ -351,15 +339,21 @@ function ()
 end,
 {description = "go back", group = "client"}),
 
--- Volume Keys
-awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2%-", false) end),
-awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2%+", false) end),
-awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer set Master 1+ toggle", false) end),
+   -- Volume Keys
+   awful.key({}, "XF86AudioLowerVolume", function ()
+    awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -2%", false) end),
+  awful.key({}, "XF86AudioRaiseVolume", function ()
+    awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ +2%", false) end),
+  awful.key({}, "XF86AudioMute", function ()
+    awful.util.spawn("amixer -D pulse set Master 1+ toggle", false) end),
+  -- Media Keys
+  awful.key({}, "XF86AudioPlay", function()
+    awful.util.spawn("playerctl play-pause", false) end),
+  awful.key({}, "XF86AudioNext", function()
+    awful.util.spawn("playerctl next", false) end),
+  awful.key({}, "XF86AudioPrev", function()
+    awful.util.spawn("playerctl previous", false) end),
 
-   -- Media Keys
-awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause", false) end),
-awful.key({}, "XF86AudioNext", function() awful.util.spawn("playerctl next", false) end),
-awful.key({}, "XF86AudioPrev", function() awful.util.spawn("playerctl previous", false) end),
 
 -- Standard program
 awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
@@ -585,7 +579,7 @@ awful.rules.rules = {
     properties = { tag = "Development" } },
 
     { rule = { class = "steam", "Steam", "discord", "Discord"},
-    properties = { tag = "Steam" } },
+    properties = { tag = "Gaming" } },
 
     { rule = { class = "lutris", "Lutris", "Battle.Net" ,"battle.net.exe", "Battle.net.exe", "bottles", "Bottles" },
     properties = { tag = "Bottles" } },
